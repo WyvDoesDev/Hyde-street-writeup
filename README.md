@@ -18,3 +18,22 @@ run = run + 1491;
 return (run == 7513);
 }
 ```
+
+from the above code example we can see our target number we want to get is 7513, This shouldn't be hard to get because it's only addition subtraction multiplication and division, heres how we can evaluate what number to provide to get 7513
+
+## How to get what number we want to give quick_maths
+first we want to take the number we want(in this case 75130 and plug it in and apply the inverse operation
+```
+run = 7513-1491 (6022)
+run = 6022 * 7 (42154)
+run = 42154 + 45 (42199)
+run = 42199 + 214 (42413)
+run = 42413 - 13651 (28762)
+run = 28762 * 9 (258858)
+run = 258858 * 10 (2588580)
+run = 2588580 * 6 (15531480)
+run = 15531480 + 236 (15531716)
+finally, run = 15531716 * 13 (201912308)
+```
+So we want to initate quick_maths with run being 201912308
+
