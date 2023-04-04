@@ -39,9 +39,6 @@ So here we want to initate quick_maths with run being 201912308, if we ever want
 
 let's put this into some code now!
 
-## Putting this all together
-
-
 ```js
 //reading data
 const data = await Deno.readTextFile("/chall/challs/generated.c");
