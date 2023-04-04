@@ -1,5 +1,5 @@
 # HAS 4 Quals Hyde Street
-Hyde Street was a fun little JS/TS challenge where the goal was to get a given value returned after a bunch of mathematical operations luckily these only consisted of simple math operations (multiplication, division, subtraction, addition). The program that was given to us was written in C which makes it a little bit harder but not by much, here's an example
+Hyde Street was a fun little JS/TS challenge where the goal was to get a given value returned after a bunch of mathematical operations luckily these only consisted of simple math operations (division, subtraction, addition in this case). The program that was given to us was written in C which makes it a little bit harder but not by much, here's an example
 ```C
 #include <stdint.h>
 #include <stdbool.h>
@@ -19,7 +19,7 @@ return (run == 7513);
 }
 ```
 
-from the above code example we can see our target number we want to get is 7513, This shouldn't be hard to get because it's only addition subtraction multiplication and division.
+from the above code example we can see our target number we want to get is 7513, This shouldn't be hard to get because it's only addition subtraction and division.
 
 ## How to get what number we want to give quick_maths
 first we want to take the number we want(in this case 75130 and plug it in and apply the inverse operation
@@ -35,5 +35,66 @@ run = 2588580 * 6 (15531480)
 run = 15531480 + 236 (15531716)
 finally, run = 15531716 * 13 (201912308)
 ```
-So we want to initate quick_maths with run being 201912308
+So here we want to initate quick_maths with run being 201912308, if we ever want to double check our answer we can repeat the same steps, but starting from the top and not inversing the operation 
+
+let's put this into some code now!
+
+## Putting this all together
+
+
+```js
+//reading data
+const data = await Deno.readTextFile("/chall/challs/generated.c");
+
+// parsing into lines
+const lines = data.split("\n");
+let in_quick_maths = false;
+let ops = []
+let final;
+//iterating through lines
+for (let line of lines) {
+    line = line.trim();
+    //finding if we are in the function
+    if (line == "bool quick_maths(uint32_t run) {") {
+        in_quick_maths = true;
+    } else if (line == "}") {
+        in_quick_maths = false;
+    } else if (in_quick_maths) {
+    //getting the value to return to true
+        if (line.startsWith("return")) {
+            final = parseInt(line.match("\\d+")[0])
+            break
+        } else {
+        //getting the operations
+            const slice = line.replace(";", "").split(" ").slice(3, 5);
+            const kind = slice[0]
+            const value = parseInt(slice[1])
+            ops.push([kind, value])
+        }
+    }
+}
+
+const inverse_ops = {
+    '+': '-',
+    '-': '+',
+    '/': '*',
+}
+
+let initial = final;
+
+//reversing the operations
+for (let op of ops.reverse()) {
+    const kind = op[0]
+    const value = op[1]
+    if (kind == '+') {
+        initial -= value
+    } else if (kind == '-') {
+        initial += value
+    } else if (kind == '/') {
+        initial *= value
+    }
+}
+//send initial value to return true
+console.log(initial)
+```
 
