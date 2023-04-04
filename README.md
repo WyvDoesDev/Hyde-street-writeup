@@ -19,7 +19,7 @@ return (run == 7513);
 }
 ```
 
-from the above code example we can see our target number we want to get is 7513, This shouldn't be hard to get because it's only addition subtraction multiplication and division, heres how we can evaluate what number to provide to get 7513
+from the above code example we can see our target number we want to get is 7513, This shouldn't be hard to get because it's only addition subtraction multiplication and division.
 
 ## How to get what number we want to give quick_maths
 first we want to take the number we want(in this case 75130 and plug it in and apply the inverse operation
