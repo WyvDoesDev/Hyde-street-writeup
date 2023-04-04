@@ -39,6 +39,42 @@ So here we want to initate quick_maths with run being 201912308, if we ever want
 
 let's put this into some code now!
 
+## Putting this into code
+
+The first thing we want to do is start parsing the file given to us, since this challenge uses Deno we can read the file with Deno.readTextFile() and make a hacky C parser like so
+```js
+//reading data
+const data = await Deno.readTextFile("/chall/challs/generated.c");
+
+// parsing into lines
+const lines = data.split("\n");
+let in_quick_maths = false;
+let ops = []
+let final;
+//iterating through lines
+for (let line of lines) {
+    line = line.trim();
+    //finding if we are in the function
+    if (line == "bool quick_maths(uint32_t run) {") {
+        in_quick_maths = true;
+    } else if (line == "}") {
+        in_quick_maths = false;
+    } else if (in_quick_maths) {
+    //getting the value to return to true
+        if (line.startsWith("return")) {
+            final = parseInt(line.match("\\d+")[0])
+            break
+        } else {
+        //getting the operations
+            const slice = line.replace(";", "").split(" ").slice(3, 5);
+            const kind = slice[0]
+            const value = parseInt(slice[1])
+            ops.push([kind, value])
+        }
+    }
+}
+```
+
 ```js
 //reading data
 const data = await Deno.readTextFile("/chall/challs/generated.c");
