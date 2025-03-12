@@ -1,5 +1,5 @@
 # HAS 4 Quals Hyde Street
-Hyde Street was a fun little JS/TS challenge where the goal was to get a given value returned after a bunch of mathematical operations luckily these only consisted of simple math operations (division, subtraction, addition in this case). The program that was given to us was written in C which makes it a little bit harder but not by much, here's an example
+Hyde Street was a fun little JS challenge where the goal was to get a given value returned after a bunch of mathematical operations luckily these only consisted of simple math operations (division, subtraction, addition in this case). The program that was given to us was written in C which makes it a little bit harder but not by much, here's an example
 ```C
 #include <stdint.h>
 #include <stdbool.h>
